@@ -6,10 +6,10 @@ public final class ResponseConstants {
     private ResponseConstants() {}
 
     // List response group
-    private static final String GROUP_SUCCESS = "Berhasil";
-    private static final String GROUP_BUSINESS = "Bisnis";
-    private static final String GROUP_SYSTEM = "Sistem";
-    private static final String GROUP_MESSAGE = "Pesan";
+    private static final String GROUP_SUCCESS = "Success";
+    private static final String GROUP_BUSINESS = "Business";
+    private static final String GROUP_SYSTEM = "System";
+    private static final String GROUP_MESSAGE = "Message";
 
     // List response code
     public static final ResponseCode SUCCESS = ResponseCode.builder()
@@ -25,7 +25,7 @@ public final class ResponseConstants {
             .httpCode("400")
             .serviceCode("99")
             .caseCode("00")
-            .defaultMessage("Permintaan buruk")
+            .defaultMessage("Bad Request")
             .build();
 
     public static final ResponseCode MESSAGE_INVALID_FIELD_FORMAT = ResponseCode.builder()
@@ -33,7 +33,7 @@ public final class ResponseConstants {
             .httpCode("400")
             .serviceCode("99")
             .caseCode("01")
-            .defaultMessage("Format bidang tidak valid")
+            .defaultMessage("Invalid Field Format")
             .build();
 
     public static final ResponseCode BUSINESS_NOT_FOUND = ResponseCode.builder()
@@ -41,7 +41,7 @@ public final class ResponseConstants {
             .httpCode("404")
             .serviceCode("99")
             .caseCode("00")
-            .defaultMessage("Tidak ditemukan")
+            .defaultMessage("Not Found")
             .build();
 
     public static final ResponseCode SYSTEM_INTERNAL_SERVER_ERROR = ResponseCode.builder()
@@ -49,7 +49,7 @@ public final class ResponseConstants {
             .httpCode("500")
             .serviceCode("99")
             .caseCode("00")
-            .defaultMessage("Kesalahan server internal")
+            .defaultMessage("Internal Server Error")
             .build();
 
     // Custom service code

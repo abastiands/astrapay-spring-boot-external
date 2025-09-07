@@ -1,10 +1,10 @@
 package com.astrapay.controller.advice;
 
+import com.astrapay.constants.Constants;
 import com.astrapay.constants.ResponseConstants;
 import com.astrapay.dto.ServiceResponse;
 import com.astrapay.exception.GlobalRestApiException;
 import com.astrapay.utils.DayDateUtil;
-import com.astrapay.utils.RestApiUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
 @Slf4j
@@ -25,11 +24,11 @@ public class GlobalRestApiExceptionHandler {
     // Exception handler bad request
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ServiceResponse<String> exceptionHandlerBadRequest(HttpServletRequest req, HttpMessageNotReadableException e) {
+    public ServiceResponse<String> exceptionHandlerBadRequest(HttpMessageNotReadableException e) {
         ServiceResponse<String> response = ServiceResponse.<String>builder()
                 .data(null)
                 .responseReqId(UUID.randomUUID().toString())
-                .responseCode(ResponseConstants.assignServiceCode(ResponseConstants.SYSTEM_BAD_REQUEST, RestApiUtil.getServiceCode(req.getRequestURI())).toString())
+                .responseCode(ResponseConstants.assignServiceCode(ResponseConstants.SYSTEM_BAD_REQUEST, Constants.SERVICE_CODE_NOTE).toString())
                 .responseDescription(null)
                 .responseException(ResponseConstants.SYSTEM_BAD_REQUEST.getDefaultMessage())
                 .dateRequest(DayDateUtil.dateNow())
@@ -44,7 +43,7 @@ public class GlobalRestApiExceptionHandler {
     // Exception handler invalid format
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ServiceResponse<String> exceptionHandlerInvalidFormat(HttpServletRequest req, MethodArgumentNotValidException e) {
+    public ServiceResponse<String> exceptionHandlerInvalidFormat(MethodArgumentNotValidException e) {
         String errorMessage = null;
 
         for (FieldError error : e.getBindingResult().getFieldErrors()) {
@@ -54,7 +53,7 @@ public class GlobalRestApiExceptionHandler {
         ServiceResponse<String> response = ServiceResponse.<String>builder()
                 .data(null)
                 .responseReqId(UUID.randomUUID().toString())
-                .responseCode(ResponseConstants.assignServiceCode(ResponseConstants.MESSAGE_INVALID_FIELD_FORMAT, RestApiUtil.getServiceCode(req.getRequestURI())).toString())
+                .responseCode(ResponseConstants.assignServiceCode(ResponseConstants.MESSAGE_INVALID_FIELD_FORMAT, Constants.SERVICE_CODE_NOTE).toString())
                 .responseDescription(null)
                 .responseException(errorMessage)
                 .dateRequest(DayDateUtil.dateNow())
@@ -69,11 +68,11 @@ public class GlobalRestApiExceptionHandler {
     // Exception handler not found
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ServiceResponse<String> exceptionHandlerNotFound(HttpServletRequest req, NoHandlerFoundException e) {
+    public ServiceResponse<String> exceptionHandlerNotFound(NoHandlerFoundException e) {
         ServiceResponse<String> response = ServiceResponse.<String>builder()
                 .data(null)
                 .responseReqId(UUID.randomUUID().toString())
-                .responseCode(ResponseConstants.assignServiceCode(ResponseConstants.BUSINESS_NOT_FOUND, RestApiUtil.getServiceCode(req.getRequestURI())).toString())
+                .responseCode(ResponseConstants.assignServiceCode(ResponseConstants.BUSINESS_NOT_FOUND, Constants.SERVICE_CODE_NOTE).toString())
                 .responseDescription(null)
                 .responseException(ResponseConstants.BUSINESS_NOT_FOUND.getDefaultMessage())
                 .dateRequest(DayDateUtil.dateNow())
@@ -88,11 +87,11 @@ public class GlobalRestApiExceptionHandler {
     // Exception handler internal server error
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ServiceResponse<String> exceptionHandlerInternalServerError(HttpServletRequest req, Exception e) {
+    public ServiceResponse<String> exceptionHandlerInternalServerError(Exception e) {
         ServiceResponse<String> response = ServiceResponse.<String>builder()
                 .data(null)
                 .responseReqId(UUID.randomUUID().toString())
-                .responseCode(ResponseConstants.assignServiceCode(ResponseConstants.SYSTEM_INTERNAL_SERVER_ERROR, RestApiUtil.getServiceCode(req.getRequestURI())).toString())
+                .responseCode(ResponseConstants.assignServiceCode(ResponseConstants.SYSTEM_INTERNAL_SERVER_ERROR, Constants.SERVICE_CODE_NOTE).toString())
                 .responseDescription(null)
                 .responseException(ResponseConstants.SYSTEM_INTERNAL_SERVER_ERROR.getDefaultMessage())
                 .dateRequest(DayDateUtil.dateNow())

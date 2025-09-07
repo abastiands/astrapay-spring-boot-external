@@ -7,9 +7,9 @@ import com.astrapay.entity.Note;
 public class NoteMapper {
     public static Note createNoteMapper(NoteRequest request) {
         return Note.builder()
-                .title(request.getTitle())
-                .description(request.getDescription())
-                .date(request.getDate())
+                .title(request.getTitle().trim())
+                .description(request.getDescription().trim())
+                .date(request.getDate().trim())
                 .build();
     }
 

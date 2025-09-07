@@ -4,8 +4,10 @@ import com.astrapay.entity.Note;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class NoteRepository {
@@ -13,7 +15,9 @@ public class NoteRepository {
     private int currentId = 0;
 
     public List<Note> findAll() {
-        return new ArrayList<>(noteList);
+        return noteList.stream()
+                .sorted(Comparator.comparing(Note::getId))
+                .collect(Collectors.toList());
     }
 
     public Optional<Note> findById(Integer id) {

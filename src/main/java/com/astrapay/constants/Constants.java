@@ -10,6 +10,6 @@ public class Constants {
     public static final String SERVICE_NOTE = "Note";
 
     // List response message
-    public static final String NOT_FOUND = "tidak ditemukan";
+    public static final String NOT_FOUND = "not found";
     public static final String NOTE_NOT_FOUND = SERVICE_NOTE.concat(" ").concat(NOT_FOUND);
 }

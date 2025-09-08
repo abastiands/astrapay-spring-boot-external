@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
@@ -15,9 +16,11 @@ import javax.validation.constraints.Pattern;
 @Builder
 public class NoteRequest {
     @NotBlank(message = "Title must filled")
+    @Size(max = 15, message = "Title must not exceed 15 characters")
     private String title;
 
     @NotBlank(message = "Description must filled")
+    @Size(max = 50, message = "Description must not exceed 50 characters")
     private String description;
 
     @NotBlank(message = "Date must filled")

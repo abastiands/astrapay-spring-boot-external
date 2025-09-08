@@ -75,7 +75,7 @@ public class NoteController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public ServiceResponse<NoteResponse> createItem(@Valid @RequestBody NoteRequest request) {
+    public ServiceResponse<NoteResponse> createNote(@Valid @RequestBody NoteRequest request) {
         NoteResponse noteResponse = NoteMapper.createNoteResponseMapper(noteService.addNote(request));
 
         NoteValidation.noteResponseNull(noteResponse);
@@ -98,7 +98,7 @@ public class NoteController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public ServiceResponse<NoteResponse> updateItem(@Valid @PathVariable String id, @RequestBody NoteRequest request) {
+    public ServiceResponse<NoteResponse> updateNote(@Valid @PathVariable String id, @RequestBody NoteRequest request) {
         NoteResponse noteResponse = NoteMapper.createNoteResponseMapper(noteService.updateNote(Integer.parseInt(id), request));
 
         NoteValidation.noteResponseNull(noteResponse);
@@ -117,7 +117,7 @@ public class NoteController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ServiceResponse<String> deleteItem(@Valid @PathVariable String id) {
+    public ServiceResponse<String> deleteNote(@Valid @PathVariable String id) {
         noteService.deleteNote(Integer.parseInt(id));
 
         ServiceResponse<String> response = ServiceResponse.<String>builder()
